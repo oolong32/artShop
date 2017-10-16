@@ -14,10 +14,10 @@ const index = require('./routes/index');
 const app = express();
 // Verbindung zu mongoDB je nach environment:
 if ('development' === app.get('env')) {
-  var mongoDB = 'mongodb://localhost:27017/foo';
+  let mongoDB = 'mongodb://localhost:27017/foo';
     mongoose.connect(mongoDB);
   } else {
-  // var mongoDB = "what is the path for production?";
+  // let mongoDB = "what is the path for production?";
   // mongoose.connect(mongoDB, { config: { autoIndex: false }});
 }
 const db = mongoose.connection;
