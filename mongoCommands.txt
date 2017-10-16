@@ -1,0 +1,37 @@
+Quick Reference:
+https://docs.mongodb.com/manual/reference/mongo-shell/
+
+$ mongo (öffnet shell)
+> cls (clear screen)
+> show dbs (datenbanken zeigen)
+> use foobar (in datenbank wechseln, bzw. erschaffen und wechseln)
+> db (zeigt datenbank an, in der man sich befindet)
+> show collections
+> db.createCollection("bar");
+> db.collectionName.find();
+> db.collectionName.find().count();
+> db.collectionName.find().limit(2); // die ersten beiden
+> db.collectionName.find().pretty(); // mit umbrüchen und einrückung
+> db.collectionName.find().map(function(foo) {return foo.title;}); // klar oder? fragt sich wie zuverlässig, weil selber rausgefunden
+> db.collectionName.find().forEach(function (entry) { print("look here: " + entry.key); }); // ähnlich
+> db.collectionName.find().sort({key:1}); // aufsteigend (-1 absteigend)
+> db.collectionName.insert({ … });
+> db.collectionName.update({match},{$set:{newKey: "newValue"}});
+> db.collectionName.update({match},{$unset:{key: "value"}});
+> db.collectionName.remove({match}); // löscht eintrag in collection
+> db.collectionName.drop(); // löscht collection
+
+To exit the shell, type quit() or use the <Ctrl-C> shortcut.
+
+Create User // afaik unnötig
+> db.createUser({
+	user: "josef",
+	pwd: "foobar",
+	roles: ["readWirte", "dbAdmin"]
+  });
+
+
+
+Dokku Mongo
+
+dokku mongo:enter fubar // Konsole öffnen

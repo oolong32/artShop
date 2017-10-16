@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{# check environment and set path accordingly #}
+{% if settings.env == "development" %}
+  {% set path = "http://localhost:3000" %}
+{% else %}
+  {% set path = "https://the.real.thing" %}
+{% endif %}
+<!--
+
+  Trubba not.
+
+-->
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/fonts/font.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  {% block content %}
+    <p>Fehlfunktion in den Templates?</p>
+  {% endblock %}
+</body>
+</html>

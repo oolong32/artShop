@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+  {% if things | length %}
+  <ul>
+  {% for thing in things %}
+    <li><a href="{{ thing.url }}">{{ thing.content }}</a></li>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p>Nothing.</p>
+  {% endif %}
+{% endblock %}
