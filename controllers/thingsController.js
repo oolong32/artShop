@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 // const async = require('async');
+const fs = require('fs');
+const path = require('path');
 
 // model
 const Thing = require('../models/thing.js');
@@ -25,21 +27,24 @@ exports.thing = function(req, res) {
 
 /* get form to create thing */
 exports.thingCreateGet = function(req, res) {
-    res.render('thing_create.html', { title: 'New Thing.' });
+    res.render('thing_create.html', { title: 'Create New Thing.' });
 }
 
-/* post form to create thing */
+/* POST form to create thing */
 exports.thingCreatePost = function(req, res, next) {
   // validate, sanitize & trim
   req.checkBody('content', 'Content not alphanumeric').isAlpha();
   req.sanitize('content').escape(); // redundant, weil html nicht alphanumerisch
   req.sanitize('content').trim();
 
-  var thing = new Thing({ content: req.body.content });
+  let thing = new Thing({
+    content: req.body.content,
+    image_filename: req.file.filename
+  }); 
 
-  var errors = req.validationErrors();
+  let errors = req.validationErrors();
   if (errors) {
-        // If there are errors render the form again, passing the previously entered values and errors
+    // If there are errors render the form again, passing the previously entered values and errors
     res.render('thing_create.html', { title: 'New Thing', thing: thing, errors: errors});
     return;
   } else {
@@ -61,3 +66,5 @@ exports.thingCreatePost = function(req, res, next) {
     });
   }
 }
+
+// Todo: Update statt Create

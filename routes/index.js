@@ -5,7 +5,7 @@ const path = require('path');
 const mime = require('mime/lite');
 
 // Multer (file upload)
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, '../public/uploads'))
   },
@@ -14,14 +14,14 @@ var storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
   }
 })
-var upload = multer({
+const upload = multer({
   storage: storage,
   limits: {fileSize: 2000000},
   fileFilter: function(req, file, cb) {
-    var filetypes = /jpeg|jpg|png|gif/;
-    var mime_type = mime.extension(file.mimetype);
+    let filetypes = /jpeg|jpg|png|gif/;
+    let mime_type = mime.extension(file.mimetype);
     // var mime_type = filetypes.test(file.mimetype);
-    var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     if (mime_type && extname) {
       return cb(null, true);
     }
@@ -30,8 +30,8 @@ var upload = multer({
 });
 
 // Require controller modules
-var index_controller = require('../controllers/indexController.js')
-var things_controller = require('../controllers/thingsController.js')
+const index_controller = require('../controllers/indexController.js')
+const things_controller = require('../controllers/thingsController.js')
 
 /* GET home page. */
 router.get('/', index_controller.index);
